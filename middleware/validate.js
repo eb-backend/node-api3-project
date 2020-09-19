@@ -1,4 +1,5 @@
-const User = require('./userDb');
+const User = require('../users/userDb');
+const Post = require("../posts/postDb")
 const validateUserId=()=>{
     return(req,res,next)=>{
         User.getById(req.params.id)
@@ -7,7 +8,7 @@ const validateUserId=()=>{
                 req.user=user
                 next()
             }else{
-                res.status(404).json({message:"invalid user"})
+                res.status(404).json({message:"Error! User does not exist"})
             }
         })
         .catch(next)
@@ -21,8 +22,24 @@ const validateUser=()=>{
                 message: "missing required name field"
             })
         }
+        next()
     }
 
+}
+
+const validatePostId=()=>{
+    return(req,res,next)=>{
+        Post.getById(req.params.id)
+        .then(post=>{
+            if (post){
+                req.user=post
+                next()
+            }else{
+                res.status(404).json({message:"invalid post"})
+            }
+        })
+        .catch(next)
+    }
 }
 
 const validatePost=()=>{
@@ -31,10 +48,12 @@ const validatePost=()=>{
             return res.status(400).json({message:"Missing required text field"})
 
         }
+        next()
     }
 }
 module.exports={
     validateUserId,
     validateUser,
-    validatePost
+    validatePost,
+    validatePostId
 }

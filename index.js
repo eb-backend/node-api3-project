@@ -5,7 +5,6 @@ const postRouter=require("./posts/postRouter")
 
 const server = express();
 server.use(express.json());
-// server.use(morgan("combined")) //adds information from the person doing the call request in the console
 server.use(logger())
 server.use(userRouter)
 server.use(postRouter)
@@ -16,7 +15,6 @@ server.use((err, req,res, next)=>{
   res.status(500).json({
     message: "Something went wrong, try again later"
   })
-
 })
 
 
