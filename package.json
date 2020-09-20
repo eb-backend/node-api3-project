@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "watch": "nodemon --require dotenv/config index.js",
+        "start": "node index.js",
         "server": "nodemon index.js"
     },
     "repository": {
