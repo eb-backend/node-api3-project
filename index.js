@@ -2,12 +2,15 @@ const express = require('express');
 const logger= require("./middleware/logger")
 const userRouter=require("./users/userRouter")
 const postRouter=require("./posts/postRouter")
+const cors=require("cors")
 
 const server = express();
 const port = process.env.PORT || 1333
 server.use(express.json());
 server.use(logger())
-server.use(userRouter)
+server.use(cors())
+
+server.use("/",userRouter)
 server.use(postRouter)
 
 //express is going to use this error catching middleware
