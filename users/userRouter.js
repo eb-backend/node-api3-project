@@ -37,6 +37,15 @@ router.get('/', (req, res) => {
   .catch(err=>nex(err))
 });
 
+router.get('/env', (req, res) => {
+  // do your magic!
+  User.get(req.query)
+  .then(user=>{
+    res.status(200).json({message: `Welcome ${process.env.COHORT}`, fact:process.env.FUN_FACT || "I have no fun fact"})
+  })
+  .catch(err=>nex(err))
+});
+
 router.get('/:id', validateUserId(), (req, res) => {
   // do your magic!
   res.status(200).json(req.user)

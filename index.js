@@ -4,6 +4,7 @@ const userRouter=require("./users/userRouter")
 const postRouter=require("./posts/postRouter")
 
 const server = express();
+const port = process.env.PORT || 1333
 server.use(express.json());
 server.use(logger())
 server.use(userRouter)
@@ -23,6 +24,6 @@ server.use((err, req,res, next)=>{
 // add an endpoint that returns all the messages for a hub
 // add an endpoint for adding new message to a hub
 
-server.listen(1333, () => {
-  console.log('\n*** server Running on http://localhost:1333 ***\n');
+server.listen(port, () => {
+  console.log(`\n*** server Running on http://localhost:${port} ***\n`);
 });
